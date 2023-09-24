@@ -1,0 +1,15 @@
+[user]
+    email = robertrivarola060@gmail.com
+    name = Robert1807
+
+[core]
+	editor = nvim
+
+[init]
+    defaultBranch = main
+
+[branch]
+    autosetuprebase = always
+
+[pull]
+    rebase = true

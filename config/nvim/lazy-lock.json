@@ -1,0 +1,8 @@
+{
+  "gitsigns.nvim": { "branch": "main", "commit": "fef5d90953f0a730483b44745fae5938ba8227f8" },
+  "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
+  "nvim-treesitter": { "branch": "master", "commit": "96a50241987531fdb8a516998b72c19f563ccd6c" },
+  "nvim-treesitter-textobjects": { "branch": "master", "commit": "bd103502252027434ec42f628d2dbf54821d4ce6" },
+  "vim-enfocado": { "branch": "main", "commit": "845835a58d285eb8c1ced5dba83bfdec6e40d828" },
+  "vim-fugitive": { "branch": "master", "commit": "6fcb0ad03982de646e3fecb6915e585651b9a9fb" }
+}

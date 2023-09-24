@@ -1,0 +1,5 @@
+# SXHKD
+sxhkd &
+
+# Run BSPwm
+exec bspwm

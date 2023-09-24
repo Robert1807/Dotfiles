@@ -1,0 +1,79 @@
+Cambiando la resolucion de la pantalla
+
+Cambiar la resolucion de la pantalla no es nada complicado de hacer mediante la interfaz grafica del gestor de pantalla, no obstante, vamos primero a aprender a cambiar la resolucion o retacion de pantalla por linea de comandos utilizando la herramienta xrandr.
+
+El nombre xrandr viene de <<X window system Resize and Rotate extension>>.
+
+Podemos listar los monitores activos mediante:
+#xrander --listactivemonitors
+
+Por su parte, podemos listar todas las resoluciones disponibles para cada uno usando el comando:
+#xrandr // sin argumentos
+
+Para cambiar la resolucion del monitor por una de la lista, podemos hacer:
+#xrandr --output MONITOR --mode MODO
+
+Por ejemplo, si quiero configurar una resolucion de 1024x768 en VGA-0, puedo ejecutar:
+#xrandr --output VGA-0 --mode 1024x768
+
+Si necesitamos tambien agregar el rate de refresco de la pantalla, podemos agregar <<--rate 75>> si deseamos confgurarlo a 75 ciclos.
+
+Por otro lado, si tenemos dos pantallas (no es mi caso) podemos agregar varias opciones que configuran una en forma relativa a la otra.
+Por ejemplo, podemos usar: --left-of, right-of, --above, --bellow y --same-as, siempre acompanhando a estas opciones con el nombre de nuestra pantalla.
+Para mas informacion sobre que hacen estas opciones:
+#man xrandr
+
+Hay que considerar que cambiar la resolucion de esta forma no lo hace persistente, al reiniciar el sistema volveremos a tener la resolucion original.
+Para lograr que se mantenga luego del reinicio seria conveniente agregar las configuraciones al archivo xorg.conf, o agregar los comandos necesarios al ~/.profile o ~/.xinitrc (soluciones no tan elegantes como la primera, claro)
+
+
+Agregando una nueva resolucion
+
+Si al cambiar la resolucion, ya sea mediante la interfaz grafica o utilizando xrandr para seleccionar una resolucion de la list, vemos que la resolucion no esta presente, podemos agregarla (siempre y cuando nuestro monitor la soporte).
+
+Supongamos que la resolucion <<1920x1080>> no esta presente en nuestra configuracion (ni xrandr, ni interfaz grafica) y deseamos agregarla porque nuestro monitor si la soporta.
+
+Primero debemos calcular el "modo" correspondiente a la resolucion dada. Para ello vamos a ejecutar el comando:
+#sudo cvt 1920 1080
+
+Tendremos una salida como esta:
+#cvt 1920 1080
+# 1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz Modeline "1920x1080_60.00" 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
+
+Ahora debemos copiar el contenido del Modeline "1920x1080_60.00" 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync, y agregarlo con xrandr de esta forma:
+#xrandr --newmode "1920x1080_60.00" 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
+
+Con eso tendremos un nuevo modo de pantalla cargado en el sistema. Ahora debemos asociarlo con nuestro monitor, en mi caso, VGA-0, de esta forma:
+#xrandr --addmode eDP-1 "1920x1080_60.00"
+
+Ahora, tanto al listar los modos disponibles con xrandr sin argumentos, como al verlos en el desplegable de resoluciones de la configuracion de pantalla en el escritorio, veremos la nueva resolucion para poder utilizar.
+
+
+Dando persistencia
+
+De nuevo, esto solamente va a ser valido mientras no reiniciemos el sistema.
+
+Para hacerlo persistente una forma es agregar estos comandos:
+xrandr --newmode "1920x1080_60.00" 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
+xrandr --addmode eDP-1 "1920x1080_60.00"
+
+En el archivo ~/.profile o ~/.xinitrc de cada usuario de modo que el usuario cuando inicie cargue la nueva configuracion.
+
+Otra forma de hacerlo para todos los usuarios es crear un script llamado nueva_resolucion.sh en el directorio /etc/profile.d/ que incorpore las lineas que agregan el modo y lo asocian con nuestro monitor.
+
+En mi caso, edito el archivo:
+
+sudo nvim /etc/profile.d/nueva_resolucion.sh
+
+Y agregando las lineas necesarias:
+
+#!/bin/sh
+xrandr --newmode "1920x1080_60.00" 173.00 1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
+xrandr --addmode eDP-1 1920x1080_60.00
+xrandr --output eDP-1 --mode 1920x1080_60.00
+
+Solo nos queda darle permisos de ejecucion al script:
+
+sudo chmod +x /etc/profile.d/nueva_resolucion.sh
+
+Y al reiniciar el sistema deberiamos tener la nueva resolucion cargada.
