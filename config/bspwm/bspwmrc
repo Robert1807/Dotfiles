@@ -20,7 +20,7 @@ sxhkd &
 picom --config /home/robert/.config/picom/picom.conf &
 polybar bar &
 dunst &
-feh --bg-fill /home/robert/Pictures/Wallpapers/wall6.jpg &
+feh --bg-fill /home/robert/Pictures/Wallpapers/wall4.jpg &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 eval $(gnome-keyring-daemon -s -- components=pkcs11,secrets,ssh,gpg) &
 xsetroot -cursor_name left_ptr &
