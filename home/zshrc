@@ -55,7 +55,7 @@ alias xmr='xmonad --recompile'
 alias xmc='vi ~/.xmonad/xmonad.hs'
 alias cp='cp -rv'
 alias mkdir='mkdir -pv'
-alias actualizar='sudo reflector --verbose --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist ; sudo pacman -Syu ; paru -Syu'
+alias actualizar='sudo reflector --verbose --latest 15 --protocol https --sort rate --save /etc/pacman.d/mirrorlist ; sudo pacman -Syu ; paru -Syu'
 alias limpiar='sudo pacman -Rns $(pacman -Qtdq);paru -c'
 
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
