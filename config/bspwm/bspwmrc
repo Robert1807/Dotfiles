@@ -17,8 +17,10 @@ export EDITOR=nvim
 pkill -9 polybar &
 pgrep -x sxhkd > /dev/null
 sxhkd &
+pkill picom
 picom --config /home/robert/.config/picom/picom.conf &
 polybar bar &
+pkill dunst
 dunst -config ~/.config/dunst/dunstrc &
 feh --bg-fill /home/robert/Pictures/Wallpapers/wall7.png &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
