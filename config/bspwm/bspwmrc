@@ -19,7 +19,7 @@ pgrep -x sxhkd > /dev/null
 sxhkd &
 picom --config /home/robert/.config/picom/picom.conf &
 polybar bar &
-dunst &
+dunst -config ~/.config/dunst/dunstrc &
 feh --bg-fill /home/robert/Pictures/Wallpapers/wall7.png &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 eval $(gnome-keyring-daemon -s -- components=pkcs11,secrets,ssh,gpg) &
