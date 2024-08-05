@@ -23,6 +23,8 @@ if status is-interactive
     alias cat='bat'
     alias mtp-mount='mkdir -p ~/mtp && simple-mtpfs ~/mtp && cd ~/mtp'
     alias mtp-umount='fusermount -u ~/mtp && rm -rf ~/mtp'
+    alias usb-mount='udisksctl mount -b'
+    alias usb-umount='udisksctl unmount -b'
     alias vi='nvim'
     alias vim='nvim'
     alias cl='clear'
