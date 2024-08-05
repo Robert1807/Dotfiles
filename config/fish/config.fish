@@ -21,6 +21,8 @@ if status is-interactive
     alias lla='eza -lhaF --color=always --icons --sort=size --group-directories-first'
     alias ls='eza --color=always --icons --sort=size --group-directories-first'
     alias cat='bat'
+    alias mtp-mount='mkdir -p ~/mtp && simple-mtpfs ~/mtp && cd ~/mtp'
+    alias mtp-umount='fusermount -u ~/mtp && rm -rf ~/mtp'
     alias vi='nvim'
     alias vim='nvim'
     alias cl='clear'
